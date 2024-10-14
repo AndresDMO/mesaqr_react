@@ -1,0 +1,20 @@
+import React from 'react'
+import {Modal} from 'semantic-ui-react'
+import "./BasicModal.scss";
+import { size } from 'lodash';
+
+export function BasicModal(props) {
+  const {show, size, title, children, onClose} = props;
+  return (
+    <Modal className='basic-modal' open={show} onClose={onClose} size={size}>
+      {title && <Modal.Header>{title}</Modal.Header>}
+      <Modal.Content>
+        <p>{children}</p>
+        </Modal.Content>
+    </Modal>
+  )
+}
+
+BasicModal.defaultProps = {
+  size: "tiny",
+}

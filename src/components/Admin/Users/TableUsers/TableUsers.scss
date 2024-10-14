@@ -1,0 +1,14 @@
+.table-users-admin{
+    td{
+        &.status{
+            .icon{
+                &.close{
+                    color: #f44336;
+                }
+                &.check{
+                    color: #4caf50;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,27 @@
+.login-admin{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2a2a72;
+    background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 81%);
+
+    &__content{
+        background-color: #fff;
+        padding: 50px 50px;
+        border-radius: 20px;
+        width: 450px;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.3);
+        -webkit-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.3);
+        -moz-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.3);
+
+        > h1{
+            font-size: 30px;
+            text-align: center;
+            font-size: 30px;
+            color: #2a2a72;
+            margin-bottom: 50px;
+        }
+    }    
+}
