@@ -1,13 +1,18 @@
-import {useState} from "react";
-import {getMeApi, getUserApi, addUserApi, updateUserApi} from "../api/user";
-import {useAuth} from "."
-
+import { useState } from "react";
+import {
+  getMeApi,
+  getUserApi,
+  addUserApi,
+  updateUserApi,
+  deleteUserApi,
+} from "../api/user";
+import { useAuth } from "./useAuth";
 
 export function useUser() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [users, setUsers] = useState(null);
-  const {auth} = useAuth();
+  const { auth } = useAuth();
 
   const getMe = async (token) => {
     try {
@@ -18,7 +23,7 @@ export function useUser() {
     }
   };
 
-  const getUsers = async() => {
+  const getUsers = async () => {
     try {
       setLoading(true);
       const response = await getUserApi(auth.token);
@@ -28,7 +33,7 @@ export function useUser() {
       setLoading(false);
       setError(error);
     }
-  }
+  };
 
   const addUser = async (data) => {
     try {
@@ -52,7 +57,18 @@ export function useUser() {
     }
   };
 
-  return{
+  const deleteUser = async (id) => {
+    try {
+      setLoading(true);
+      await deleteUserApi(id, auth.token);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      setError(error);
+    }
+  };
+
+  return {
     loading,
     error,
     users,
@@ -60,5 +76,6 @@ export function useUser() {
     getUsers,
     addUser,
     updateUser,
+    deleteUser,
   };
 }
