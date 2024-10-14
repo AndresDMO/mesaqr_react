@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {getMeApi, getUserApi} from "../api/user";
+import {getMeApi, getUserApi, addUserApi, updateUserApi} from "../api/user";
 import {useAuth} from "."
 
 
@@ -30,12 +30,35 @@ export function useUser() {
     }
   }
 
-  
+  const addUser = async (data) => {
+    try {
+      setLoading(true);
+      await addUserApi(data, auth.token);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      setError(error);
+    }
+  };
+
+  const updateUser = async (id, data) => {
+    try {
+      setLoading(true);
+      await updateUserApi(id, data, auth.token);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      setError(error);
+    }
+  };
+
   return{
     loading,
     error,
     users,
     getMe,
     getUsers,
+    addUser,
+    updateUser,
   };
 }

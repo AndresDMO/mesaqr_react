@@ -8,16 +8,24 @@ export function UsersAdmin() {
   const [showModal, setShowModal] = useState(false);
   const [titleModal, setTitleModal] = useState(null);
   const [contentModal, setContentModal] = useState(null);
+  const [refetch, setRefetch] = useState(false);
   const { loading, users, getUsers } = useUser();
 
 
-  useEffect(() => getUsers(), []);
+  useEffect(() => {getUsers()}, [refetch]);
 
-  const openCloseModal = () => setShowModal(prevState => !prevState);
+  const openCloseModal = () => setShowModal((prevState) => !prevState);
+  const onRefetch = () => setRefetch((prevState) => !prevState);
 
   const addUser = () => {
-    setTitleModal("Crear nuevo usuario");
-    setContentModal(<AddEditUserForm />);
+    setTitleModal("Crear Nuevo Usuario");
+    setContentModal(<AddEditUserForm onClose={openCloseModal} onRefetch={onRefetch} />);
+    openCloseModal();
+  };
+
+  const updateUser = (data) => {
+    setTitleModal("Actualizar Usuario");
+    setContentModal(<AddEditUserForm onClose={openCloseModal} onRefetch={onRefetch} user={data} />);
     openCloseModal();
   };
 
@@ -32,13 +40,13 @@ export function UsersAdmin() {
           Cargando usuarios...
         </Loader>
       ) : (
-        <TableUsers users={users}/>
+        <TableUsers users={users} updateUser={updateUser}/>
         )}
 
         <BasicModal
         show={showModal}
         onClose={openCloseModal}
-        title="Crear Usuario" 
+        title={titleModal} 
         children={contentModal}/>
     </>
   );

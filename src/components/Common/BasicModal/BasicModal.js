@@ -6,11 +6,13 @@ import { size } from 'lodash';
 export function BasicModal(props) {
   const {show, size, title, children, onClose} = props;
   return (
-    <Modal className='basic-modal' open={show} onClose={onClose} size={size}>
+    <Modal
+      className='basic-modal' 
+      open={show} 
+      onClose={onClose} 
+      size={size}>
       {title && <Modal.Header>{title}</Modal.Header>}
-      <Modal.Content>
-        <p>{children}</p>
-        </Modal.Content>
+      <Modal.Content>{children}</Modal.Content>
     </Modal>
   )
 }
